@@ -28,6 +28,20 @@ var albumPicasso = {
      ]
  };
 
+var albumRelax = {
+	title: 'The Sun',
+	artist: 'James Bay',
+	label: 'blues',
+	year: '2001',
+	albumArtUrl: 'assets/images/album_covers/15.png',
+	songs: [
+		{ title: 'Sun', duration: '3:02' },
+		{ title: 'Moon', duration: '4:27' },
+		{ title: 'Stars', duration: '2:59' },
+		{ title: 'Galaxy', duration: '5:07' }
+	]
+};
+
 var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
@@ -40,17 +54,22 @@ var createSongRow = function(songNumber, songName, songLength) {
      return template;
  };
 
+var albumTitle = document.getElementsByClassName('album-view-title')[0];
+var albumArtist = document.getElementsByClassName('album-view-artist')[0];
+var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
+var albumImage = document.getElementsByClassName('album-cover-art')[0];
+var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+var albumCover = document.getElementsByClassName('album-cover')[0];
+
+
 var setCurrentAlbum = function(album) {
-     var albumTitle = document.getElementsByClassName('album-view-title')[0];
-     var albumArtist = document.getElementsByClassName('album-view-artist')[0];
-     var albumReleaseInfo = document.getElementsByClassName('album-view-release-info')[0];
-     var albumImage = document.getElementsByClassName('album-cover-art')[0];
-     var albumSongList = document.getElementsByClassName('album-view-song-list')[0];
+
  
      albumTitle.firstChild.nodeValue = album.title;
      albumArtist.firstChild.nodeValue = album.artist;
      albumReleaseInfo.firstChild.nodeValue = album.year + ' ' + album.label;
      albumImage.setAttribute('src', album.albumArtUrl);
+	 
  
      albumSongList.innerHTML = '';
  
@@ -61,4 +80,9 @@ var setCurrentAlbum = function(album) {
  
  window.onload = function() {
      setCurrentAlbum(albumPicasso);
+	 albumImage.addEventListener("click", function(){
+		 							for (var i=0; i<album.length;i++){
+										setCurrentAlbum(i);
+	 									}
+	 								});
  };
