@@ -108,6 +108,9 @@ var filterTimeCode = function(timeInSeconds){
 	var totalSeconds = parseFloat(timeInSeconds);
 	var minutes = Math.floor(totalSeconds / 60);
 	var seconds = parseFloat(Math.floor(totalSeconds % 60));
+	if (seconds < 10)  {
+		return minutes + ":0" + seconds;
+	}
 	return minutes + ":" + seconds;
 };
 
@@ -134,9 +137,9 @@ var setupSeekBars = function() {
 		seek(seekBarFillRatio);
 	});
 	$seekBars.find('.thumb').mousedown(function(event) {
-         // #8
+       
 		var $seekBar = $(this).parent();
-         // #9
+         
         $(document).bind('mousemove.thumb', function(event){
             var offsetX = event.pageX - $seekBar.offset().left;
             var barWidth = $seekBar.width();
@@ -145,7 +148,7 @@ var setupSeekBars = function() {
             updateSeekPercentage($seekBar, seekBarFillRatio);
 			seek(seekBarFillRatio);
          });
-          // #10
+     
          $(document).bind('mouseup.thumb', function() {
          $(document).unbind('mousemove.thumb');
          $(document).unbind('mouseup.thumb');
