@@ -84,8 +84,6 @@ var setCurrentAlbum = function(album) {
 var updateSeekBarWhileSongPlays = function() {
      if (currentSoundFile) {
          currentSoundFile.bind('timeupdate', function(event) {
-             console.log('song playing');
-			 console.log(this.getTime());
              var seekBarFillRatio = this.getTime() / this.getDuration();
              var $seekBar = $('.seek-control .seek-bar');
  
